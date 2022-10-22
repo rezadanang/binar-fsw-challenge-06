@@ -42,3 +42,19 @@ pass: superAdmin
 ```
 
 
+## Endpoint Table
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| POST | [/superadmin/login] | Login super admin |
+| POST | [/superadmin/admin/add] | Add new admin by super admin |
+| POST | [/admin/login] | Login admin |
+| POST | [/member/add] | Register new member |
+| POST | [/member/login] | Login member |
+| POST | [/cars] | Create cars data by admin or super admin |
+| GET | [/user] | Get information of profile data |
+| GET | [/cars] | Get information of cars data |
+| PUT | [/cars] | Update cars data by admin or super admin |
+| DELETE| [/cars] | Delete cars data by admin or super admin |
+
+
