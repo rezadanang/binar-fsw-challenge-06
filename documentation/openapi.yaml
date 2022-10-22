@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: BCR - Car Management API (OpenAPI 3.0)
   version: "1.0.0"
-  description: "Car Management API for challenge 06 Fullstack Web from Binar Academy Link for github: https://github.com/rezadanang/binar-fsw-challenge-06"
+  description: "Car Management API for challenge 06 Fullstack Web from Binar Academy. Github: https://github.com/rezadanang/binar-fsw-challenge-06"
   
   license:
     name: MIT 
