@@ -33,6 +33,12 @@ sequelize db:seed:all
 yarn start
 ```
 
+Car Management API Documentation with Swagger
+
+```
+http://localhost:8000/
+http://localhost:8000/documentation
+```
 
 Super Admin Account
 
