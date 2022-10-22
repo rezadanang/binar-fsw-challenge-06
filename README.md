@@ -5,8 +5,8 @@
 1. Setting db postgres
 2. Instal dependencies using yarn
 
+```
 yarn install
-
 ```
 
 3. Create db postgres
