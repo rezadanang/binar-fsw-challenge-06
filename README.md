@@ -214,3 +214,136 @@ if email incorrect
   "message": "Email is incorrect!!"
 }
 ```
+
+## POST /member/add
+- summary: Register new member
+- description: Register new member
+
+#### Responses
+- 201 Created
+
+```
+{
+  "Message": "New member has been created",
+  "schema": {
+    "email": "newmember@mail.com",
+    "password": "$2b$10$GDzM6fpxd8odKHWJOIwAZ.GUTu2OfYR8v/OZs1nEVLgVXCFPOmfsS"
+  }
+}
+```
+
+- 400 Bad Request if email already registered
+
+```
+{
+  "message": "Member email already registered!"
+}
+```
+
+## GET /user
+- summary: Get profile data
+- description: Return data profile by token
+
+#### Responses
+- 200 OK
+```
+{
+  "id": 1,
+  "email": "superadmin@mail.com",
+  "password": "$2b$10$6HnBL02xfNF/3zomu4qjtuqNh/l0Ylcj1.G4M3ZW0wJihs7AFSyu6",
+  "createdAt": "2022-10-21T09:50:27.783Z",
+  "updatedAt": "2022-10-21T09:50:27.783Z"
+}
+```
+
+## GET /cars
+- summary: Get all cars data
+- description: Return all cars data
+
+#### Responses
+- 200 OK
+```
+{
+  "message": "Successfully created car",
+  "cars": {
+    "id": 1,
+    "name": "Hyundai",
+    "isDelete": false,
+    "created_by": "admin@mail.com",
+    "deleted_by": null,
+    "updated_by": "admin@mail.com",
+    "createdAt": "2022-10-21T11:39:00.359Z",
+    "updatedAt": "2022-10-21T11:39:00.359Z"
+  }
+}
+```
+
+## POST /cars
+- summary: Create cars data
+- description: Create cars data by admin or super admin
+
+#### Responses
+- 201 Created
+```
+{
+  "status": "OK",
+  "data": {
+    "name": "Porsche",
+    "isDelete": false,
+    "created_by": "newadmin@mail.com"
+  }
+}
+```
+
+- 401 Unauthorized
+```
+{
+  "message": "Unauthorized"
+}
+```
+
+## PUT /cars/:id
+- summary: Update cars data
+- description: Update cars data by admin or superadmin
+#### Responses
+- 200 Created
+```
+{
+  "message": "Successfully updated car",
+  "data": {
+    "name": "Ford",
+    "isDelete": false,
+    "createdBy": "admin@mail.com"
+  }
+}
+```
+
+- 401 Unauthorized
+```
+{
+  "message": "Unauthorized"
+}
+```
+
+## DELETE /cars/:id
+- summary: Delete cars data
+- description: Delete cars data by admin or super admin
+#### Responses
+- 200 Deleted
+```
+{
+  "message": "Successfully deleted car",
+  "data": {
+    "name": "Ford",
+    "isDelete": true,
+    "deletedBy": "admin@mail.com"
+  }
+}
+```
+
+- 401 Unauthorized
+```
+{
+  "message": "Unauthorized"
+}
+```
