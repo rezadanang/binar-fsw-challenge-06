@@ -75,3 +75,16 @@ pass: superAdmin
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
 }
 ```
+- 403 Forbidden
+if password incorrect 
+```
+{
+  "message": "Password is incorrect!!"
+}
+```
+if email incorrect 
+```
+{
+  "message": "Email is incorrect!!"
+}
+```
