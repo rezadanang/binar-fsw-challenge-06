@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "BCR - Car Management API (OpenAPI 3.0)",
+    "title": "Car Management API (OpenAPI 3.0)",
     "version": "1.0.0",
     "description": "Car Management API for challenge 06 Fullstack Web from Binar Academy. Github: https://github.com/rezadanang/binar-fsw-challenge-06",
     "license": {
@@ -71,22 +71,6 @@
             }
           },
           "403": {
-            "description": "If Incorrect Password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Password is incorrect!!"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403 Forbidden": {
             "description": "If Incorrect Email",
             "content": {
               "application/json": {
@@ -96,6 +80,22 @@
                     "message": {
                       "type": "string",
                       "example": "Email is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "If Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password is incorrect!!"
                     }
                   }
                 }
@@ -137,7 +137,7 @@
                   "properties": {
                     "Message": {
                       "type": "string",
-                      "example": "New a  dmin has been created"
+                      "example": "New admin has been created"
                     },
                     "schema": {
                       "$ref": "#/components/schemas/DataNewAdmin"
@@ -240,7 +240,7 @@
               }
             }
           },
-          "403 forbidden": {
+          "default": {
             "description": "If Incorrect Password",
             "content": {
               "application/json": {
@@ -362,7 +362,7 @@
               }
             }
           },
-          "403 Forbidden": {
+          "403": {
             "description": "If Incorrect Email",
             "content": {
               "application/json": {
@@ -378,7 +378,7 @@
               }
             }
           },
-          "403 forbidden": {
+          "default": {
             "description": "If Incorrect Password",
             "content": {
               "application/json": {

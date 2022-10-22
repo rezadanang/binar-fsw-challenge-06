@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: BCR - Car Management API (OpenAPI 3.0)
+  title: Car Management API (OpenAPI 3.0)
   version: "1.0.0"
   description: "Car Management API for challenge 06 Fullstack Web from Binar Academy. Github: https://github.com/rezadanang/binar-fsw-challenge-06"
   
@@ -46,7 +46,7 @@ paths:
                   token: 
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA
-        "403 Forbidden":
+        "403":
           description: If Incorrect Email
           content:
             application/json:
@@ -57,7 +57,7 @@ paths:
                     type: string
                     example: Email is incorrect!!
             
-        "403":
+        "default":
           description: If Incorrect Password
           content:
             application/json:
@@ -95,7 +95,7 @@ paths:
                 properties:
                   Message:
                     type: string
-                    example: New a  dmin has been created
+                    example: New admin has been created
                   schema:
                     $ref: "#/components/schemas/DataNewAdmin"
           
@@ -164,7 +164,7 @@ paths:
                     type: string
                     example: Email is incorrect!!
             
-        "403 forbidden":
+        "default":
           description: If Incorrect Password
           content:
             application/json:
@@ -248,7 +248,7 @@ paths:
                   token: 
                     type: string
                     example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6Im5ld21lbWJlckBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEdEek02ZnB4ZDhvZEtIV0pPSXdBWi5HVVR1Mk9mWVI4di9PWnMxbkVWTGdWWENGUE9tZnNTIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0yMVQxMjowMzo1OS40MTBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0yMVQxMjowMzo1OS40MTBaIn0sImlhdCI6MTY2NjM3MjUxMH0.aUaY43TSNR3r-RHCED46daBFOkCf5RlunI1AhoFkvME
-        "403 Forbidden":
+        "403":
           description: If Incorrect Email
           content:
             application/json:
@@ -259,7 +259,7 @@ paths:
                     type: string
                     example: Email is incorrect!!
             
-        "403 forbidden":
+        "default":
           description: If Incorrect Password
           content:
             application/json:

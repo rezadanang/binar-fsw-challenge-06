@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const controllers = require("../app/controllers");
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../documentation/openapi.json');
 
 
 
@@ -26,7 +28,8 @@ router.post("/cars", controllers.api.v1.authController.adminsAuthorize, controll
 router.put("/cars/:id", controllers.api.v1.authController.adminsAuthorize, controllers.api.v1.carController.updateCar);
 // Endpoint delete cars
 router.delete("/cars/:id", controllers.api.v1.authController.adminsAuthorize, controllers.api.v1.carController.deleteCar);
-
+// documentation open api
+router.use(['/', '/documentation'], swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 router.use(controllers.api.main.onError);
 router.use(controllers.api.main.onLost);
