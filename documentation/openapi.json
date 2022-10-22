@@ -1,0 +1,1024 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "BCR - Car Management API (OpenAPI 3.0)",
+    "version": "1.0.0",
+    "description": "Car Management API for challenge 06 Fullstack Web from Binar Academy Link for github: https://github.com/rezadanang/binar-fsw-challenge-06",
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Login or register"
+    },
+    {
+      "name": "user",
+      "description": "Get profile data"
+    },
+    {
+      "name": "cars",
+      "description": "Manage cars data"
+    }
+  ],
+  "paths": {
+    "/superadmin/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login super admin",
+        "description": "Login super admin",
+        "operationId": "loginSuperAdmin",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [email, password]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuperAdmin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": {
+                      "$ref": "#/components/schemas/DataSuperAdmin"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "If Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403 Forbidden": {
+            "description": "If Incorrect Email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/superadmin/admin/add": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Register new admin",
+        "description": "Register new admin by super admin",
+        "operationId": "RegisterNewAdmin",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [email, password]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Message": {
+                      "type": "string",
+                      "example": "New a  dmin has been created"
+                    },
+                    "schema": {
+                      "$ref": "#/components/schemas/DataNewAdmin"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Admin email already registered!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/admin/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login admin",
+        "description": "Login admin",
+        "operationId": "loginAdmin",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [email, password]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "User": {
+                      "$ref": "#/components/schemas/DataAdmin"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoyLCJlbWFpbCI6Im5ld2FkbWluQG1haWwuY29tIiwicGFzc3dvcmQiOiIkMmIkMTAkdGFZbGRYeU9ucUptbEl1U0Jkb3lSdWtyWE93cWhXYzdKSWpSd1FZcE5GVWluOUo1WS9ybU8iLCJjcmVhdGVkQXQiOiIyMDIyLTEwLTIxVDExOjU4OjI3LjI5MVoiLCJ1cGRhdGVkQXQiOiIyMDIyLTEwLTIxVDExOjU4OjI3LjI5MloifSwicm9sZSI6IkFkbWluIiwiaWF0IjoxNjY2MzcyNTM0fQ.fHctpElUfL7dgB4vIPEARYNTRlzKsH2w492-z_SYXhk"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "If Incorrect Email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403 forbidden": {
+            "description": "If Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/member/add": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Register member",
+        "description": "Register member",
+        "operationId": "RegisterNewMember",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [email, password]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Member"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "Message": {
+                      "type": "string",
+                      "example": "New member has been created"
+                    },
+                    "schema": {
+                      "$ref": "#/components/schemas/DataNewMember"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Member email already registered!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/member/login": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login member",
+        "description": "Login member",
+        "operationId": "loginMember",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [email, password]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Member"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "User": {
+                      "$ref": "#/components/schemas/DataMember"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6Im5ld21lbWJlckBtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJiJDEwJEdEek02ZnB4ZDhvZEtIV0pPSXdBWi5HVVR1Mk9mWVI4di9PWnMxbkVWTGdWWENGUE9tZnNTIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0yMVQxMjowMzo1OS40MTBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0yMVQxMjowMzo1OS40MTBaIn0sImlhdCI6MTY2NjM3MjUxMH0.aUaY43TSNR3r-RHCED46daBFOkCf5RlunI1AhoFkvME"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403 Forbidden": {
+            "description": "If Incorrect Email",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403 forbidden": {
+            "description": "If Incorrect Password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Password is incorrect!!"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get profile data",
+        "description": "Return data profile by token",
+        "operationId": "GetProfileData",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [token]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "example": 1
+                    },
+                    "email": {
+                      "type": "string",
+                      "example": "superadmin@mail.com"
+                    },
+                    "password": {
+                      "type": "string",
+                      "example": "$2b$10$6HnBL02xfNF/3zomu4qjtuqNh/l0Ylcj1.G4M3ZW0wJihs7AFSyu6"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "timestamp",
+                      "example": "2022-10-21T09:50:27.783Z"
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "timestamp",
+                      "example": "2022-10-21T09:50:27.783Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars": {
+      "get": {
+        "tags": [
+          "cars"
+        ],
+        "summary": "Get all cars data",
+        "description": "Return all cars data",
+        "operationId": "GetCarsData",
+        "security": [
+          {}
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "integer",
+                      "example": "Successfully created car"
+                    },
+                    "cars": {
+                      "$ref": "#/components/schemas/CarsData"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "cars"
+        ],
+        "summary": "Create cars data",
+        "description": "Create cars data by admin or super admin",
+        "operationId": "CreateCarsData",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [token]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": "OK"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/CreateCarsData"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cars/:id": {
+      "put": {
+        "tags": [
+          "cars"
+        ],
+        "summary": "Update cars data",
+        "description": "Update cars data by admin or superadmin",
+        "operationId": "UpdateCarsData",
+        "security": [
+          {}
+        ],
+        "requestBody": {
+          "description": "Required fields [token]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully updated car"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/UpdateCarsData"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "cars"
+        ],
+        "summary": "Delete cars data",
+        "description": "Delete cars data by admin or super admin",
+        "operationId": "DeleteCarsData",
+        "security": [
+          {}
+        ],
+        "request": {
+          "description": "Required fields [token]",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJlbWFpbCI6InN1cGVyYWRtaW5AbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQ2SG5CTDAyeGZORi8zem9tdTRxanR1cU5oL2wwWWxjajEuRzRNM1pXMHdKaWhzN0FGU3l1NiIsImNyZWF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiIsInVwZGF0ZWRBdCI6IjIwMjItMTAtMjFUMDk6NTA6MjcuNzgzWiJ9LCJyb2xlIjoiU3VwZXJhZG1pbiIsImlhdCI6MTY2NjM3OTMwMn0._FLooPJzUJWjjFYMHQCCls2cESXE7KLhJSSCO5cSFgA"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully deleted car"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/DeleteCarsData"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "SuperAdmin": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "superadmin@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "superAdmin"
+          }
+        }
+      },
+      "DataSuperAdmin": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "password",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "superadmin@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$6HnBL02xfNF/3zomu4qjtuqNh/l0Ylcj1.G4M3ZW0wJihs7AFSyu6"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          }
+        }
+      },
+      "Admin": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newadmin@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "newadmin123"
+          }
+        }
+      },
+      "DataNewAdmin": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newadmin@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$taYldXyOnqJmlIuSBdoyRukrXOwqhWc7JIjRwQYpNFUin9J5Y/rmO"
+          }
+        }
+      },
+      "DataAdmin": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "password",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newadmin@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$6flnfnEXFpff8vI1MujOU.lpsIdUR5ZNosD.eKBgVDnu1IOxz9orW"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          }
+        }
+      },
+      "Member": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newmember@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "newmember123"
+          }
+        }
+      },
+      "DataNewMember": {
+        "type": "object",
+        "required": [
+          "email",
+          "password"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newmember@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$GDzM6fpxd8odKHWJOIwAZ.GUTu2OfYR8v/OZs1nEVLgVXCFPOmfsS"
+          }
+        }
+      },
+      "DataMember": {
+        "type": "object",
+        "required": [
+          "id",
+          "email",
+          "password",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "newmember@mail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "$2b$10$GDzM6fpxd8odKHWJOIwAZ.GUTu2OfYR8v/OZs1nEVLgVXCFPOmfsS"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T09:50:27.783Z"
+          }
+        }
+      },
+      "CarsData": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "isDelete",
+          "created_by",
+          "deleted_by",
+          "updated_by",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Hyundai"
+          },
+          "isDelete": {
+            "type": "boolean",
+            "example": false
+          },
+          "created_by": {
+            "type": "string",
+            "example": "admin@mail.com"
+          },
+          "deleted_by": {
+            "type": "string",
+            "example": null
+          },
+          "updated_by": {
+            "type": "string",
+            "example": "admin@mail.com"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T11:39:00.359Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "timeStamp",
+            "example": "2022-10-21T11:39:00.359Z"
+          }
+        }
+      },
+      "CreateCarsData": {
+        "type": "object",
+        "required": [
+          "name",
+          "isDelete",
+          "created_by"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Porsche"
+          },
+          "isDelete": {
+            "type": "boolean",
+            "example": false
+          },
+          "created_by": {
+            "type": "string",
+            "example": "newadmin@mail.com"
+          }
+        }
+      },
+      "UpdateCarsData": {
+        "type": "object",
+        "required": [
+          "name",
+          "isDelete",
+          "created_by"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ford"
+          },
+          "isDelete": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdBy": {
+            "type": "string",
+            "example": "admin@mail.com"
+          }
+        }
+      },
+      "DeleteCarsData": {
+        "type": "object",
+        "required": [
+          "name",
+          "isDelete",
+          "created_by"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Ford"
+          },
+          "isDelete": {
+            "type": "boolean",
+            "example": true
+          },
+          "deletedBy": {
+            "type": "string",
+            "example": "admin@mail.com"
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
+}
