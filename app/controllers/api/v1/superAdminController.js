@@ -9,15 +9,15 @@ const login = async (req, res) => {
 
     const user = await superAdminService.findByEmail(email);
     if (!user) {
-        return res.status(404).send({
-            message: "Email Salah!!",
+        return res.status(403).send({
+            message: "Email is incorrect!!",
         });
     }
 
     const status = await bcrypt.compare(password, user.password);
     if (!status) {
-        return res.status(404).send({
-            message: "Password Salah!!",
+        return res.status(403).send({
+            message: "Password is incorrect!!",
         });
     }
 

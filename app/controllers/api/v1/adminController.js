@@ -4,6 +4,13 @@ const secretKey = "secret";
 const jwt = require("jsonwebtoken");
 
 const createAdmin = async (req, res) => {
+    const existedAdmin = await adminService.findByEmail(req.body.email);
+    if (existedAdmin) {
+        return res.status(400).send({
+            message: "Admin email already registered!",
+        });
+    }
+
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const admin = {
         email: req.body.email,
@@ -12,7 +19,7 @@ const createAdmin = async (req, res) => {
     try {
         await adminService.create(admin);
         res.status(201).json({
-            message: "Admin account has been created",
+            message: "New admin has been created",
             data: admin,
         });
     } catch (error) {

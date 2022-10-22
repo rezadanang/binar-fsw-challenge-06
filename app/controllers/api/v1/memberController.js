@@ -34,7 +34,7 @@ const createMember = async (req, res) => {
     const existedUser = await memberService.findByEmail(req.body.email);
     if (existedUser) {
         return res.status(400).send({
-            message: "Email telah terdaftar, mohon gunakan email lain",
+            message: "Member email has been registered!",
         });
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
