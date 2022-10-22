@@ -60,8 +60,8 @@ pass: superAdmin
 | POST | /cars | Create cars data by admin or super admin |
 | GET | /user | Get information of profile data |
 | GET | /cars | Get information of cars data |
-| PUT | /cars | Update cars data by admin or super admin |
-| DELETE| /cars | Delete cars data by admin or super admin |
+| PUT | /cars/:id | Update cars data by admin or super admin |
+| DELETE| /cars/:id | Delete cars data by admin or super admin |
 
 ## POST /superadmin/login
 - summary: Login super admin
